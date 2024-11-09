@@ -1,0 +1,31 @@
+.app-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+.toaster-container {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border-radius: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    width: 20%;
+    justify-content: space-between;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.36) 0px 0px 12px;
+}
+.toaster-type-content {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.toaster-close {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
