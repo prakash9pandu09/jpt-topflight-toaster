@@ -11,7 +11,7 @@ function App() {
   return (
     <div className='app-container'>
         <button onClick={() => setShowToast(!showToast)}>Top Right Toaster</button>
-        {showToast && <ToastNotification onClose={onToastClose} />}
+        {showToast && <ToastNotification onClose={onToastClose} type='warning' message="Notification content" />}
     </div>
   )
 }
