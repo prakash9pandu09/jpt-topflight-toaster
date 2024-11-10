@@ -1,3 +1,4 @@
+import { Guid } from "guid-typescript";
 import { useEffect } from "react";
 import { AlertCircle, CheckCircle, Info, X, XCircle } from "react-feather";
 
@@ -14,17 +15,19 @@ export const icons = {
     warning: <AlertCircle />,
     error: <XCircle />
 }
-type Props = {
+export type NotificationProps = {
+    id?: Guid;
     onClose: () => void;
     type: keyof typeof NotificationType;
     message: string;
+    duration?: number;
 }
 
-const ToastNotification = ({onClose, type, message}: Props) => {
+const ToastNotification = ({onClose, type, message, duration = 3000}: NotificationProps) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose();
-        }, 5000);
+        }, duration);
         return () => clearTimeout(timer);
     }, []);
   return (

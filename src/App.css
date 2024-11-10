@@ -5,21 +5,39 @@
     height: 100vh;
     width: 100%;
 }
-.toaster-container {
-    position: absolute;
+#toast-container-main {
+    position: fixed;
     top: 1rem;
     right: 1rem;
+    z-index: 9999999;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    gap: 0.5rem;
+}
+.toaster-container {
     border-radius: 0.2rem;
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 0.5rem;
-    width: 25%;
     justify-content: space-between;
-    z-index: 2;
     box-shadow: rgba(0, 0, 0, 0.36) 0px 0px 12px;
     color: white;
+    animation: slide-in 0.5s;
+    transition: all 0.5s ease;
 }
+@keyframes slide-in {
+    from {
+      transform: translateX(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+
 .toaster-type-content {
     display: flex;
     gap: 1rem;
