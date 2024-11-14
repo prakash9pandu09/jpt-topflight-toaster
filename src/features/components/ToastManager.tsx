@@ -2,11 +2,18 @@ import ReactDOM from "react-dom";
 import { Guid } from "guid-typescript";
 import ToastNotification, { NotificationProps, NotificationType } from "../ToastNotification";
 
+export enum NotificationPosition {
+    'top-right',
+    'top-left',
+    'bottom-right',
+    'bottom-left'
+}
 interface ToastOptions {
     id?: Guid;
     type: keyof typeof NotificationType;
     message: string;
     duration?: number;
+    notificationPosition?: keyof typeof NotificationPosition;
   }
 
 export class NotificationManager {
@@ -16,7 +23,7 @@ export class NotificationManager {
     constructor(){
         const body = document.getElementsByTagName("body")[0] as HTMLBodyElement;
         const notificationContainer = document.createElement("div") as HTMLDivElement;
-        notificationContainer.id = "toast-container-main";
+        notificationContainer.className = "toast-container-main";
         body.insertAdjacentElement("beforeend", notificationContainer);
         this.containerRef = notificationContainer;
     }
@@ -29,6 +36,8 @@ export class NotificationManager {
             onClose: () => this.close(options.id ?? notificationId)
         }
         this.notifications = [toast, ...this.notifications];
+        this.containerRef.id = options.notificationPosition!;
+
         this.render();
     }
 
@@ -38,8 +47,12 @@ export class NotificationManager {
     }
 
     private render(): void {
-        const toastsList = this.notifications.map((toastProps: NotificationProps) => <ToastNotification key={toastProps.id?.toString()} {...toastProps} />);
-        ReactDOM.render(toastsList, this.containerRef);
+      const toastsList = this.notifications.map(
+        (toastProps: NotificationProps) => (
+          <ToastNotification key={toastProps.id?.toString()} {...toastProps} />
+        )
+      );
+      ReactDOM.render(toastsList, this.containerRef);
     }
 }
 
